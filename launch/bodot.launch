@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+    <!--include file="$(find bodot)/launchtf.launch"/-->
+
+    <include file="$(find bodot)/launch/odom.launch"/>
+
+    <include file="$(find bodot)/launch/kinematics_without_pid.launch"/>
+
+</launch>

@@ -1,0 +1,27 @@
+<launch>
+
+    <!-- Set the URDF File Location and Robot Name -->
+    <arg name="urdf_robot_file" value="$(find bodot)/urdf/bodot.urdf"/>
+    <arg name="robot_name" value="bodot" />
+
+    <arg name="x" value="0.0" />
+    <arg name="y" value="0.0" />
+    <arg name="z" value="0.7" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="cat $(arg urdf_robot_file)" />
+
+    <!-- Run a Python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -x $(arg x) -y $(arg y) -z $(arg z)  -model $(arg robot_name) -param robot_description"/>
+
+
+    <!-- Publish joint values -->
+    <arg name="model" default="$(arg urdf_robot_file)"/>
+    <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+         <param name="publish_frequency" type="double" value="100.0" />
+        <param name="robot_description" command="cat $(arg model)" />
+    </node> 
+
+
+</launch>

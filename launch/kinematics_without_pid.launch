@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node name="motor_driver_node" pkg="bodot" type="motor_driver.py" output="screen"/>
+    <node name="kinematic_node" pkg="bodot" type="kinematic_without_pid.py" output="screen"/>
+</launch>
