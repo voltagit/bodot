@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import RPi.GPIO as GPIO
 import time
 import sys
@@ -9,8 +9,8 @@ from std_msgs.msg import Int64
 
 encL_a = 12
 encL_b = 16
-encR_a = 20
-encR_b = 21 
+encR_a = 21
+encR_b = 20
 
 pulse_L = 0
 pulse_R = 0
@@ -47,6 +47,7 @@ def encR_a_callback(channel):
     print("pulse_R:          ", pulse_R, "         pulse_L:          ", pulse_L)
 
 if __name__ == '__main__':
+    rospy.init_node("read_encoder")
     encL_pub = rospy.Publisher('/enc_L', Int64, queue_size=1)
     encR_pub = rospy.Publisher('/enc_R', Int64, queue_size=1)
     while not rospy.is_shutdown():
@@ -59,5 +60,6 @@ if __name__ == '__main__':
         
         encL_pub.publish(pulse_L)
         encR_pub.publish(pulse_R)
+        rospy.Rate(200).sleep()
 
         signal.pause()
