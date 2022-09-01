@@ -50,10 +50,9 @@ class MotorDriver():
             self.p2.ChangeDutyCycle(self.pwmR.data)'''
             GPIO.output(self.DIG1, GPIO.LOW)
             GPIO.output(self.DIG2, GPIO.LOW)
-            for duty in range (0,101,1):
-                self.p1.ChangeDutyCycle(duty)
-                self.p2.ChangeDutyCycle(duty)
-                sleep(0.01)
+            self.p1.ChangeDutyCycle(self.pwmL.data)
+            self.p2.ChangeDutyCycle(self.pwmR.data)
+            sleep(0.01)
             
         self.p1.stop()
         self.p2.stop()
