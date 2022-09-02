@@ -48,10 +48,16 @@ class MotorDriver():
             GPIO.output(self.DIG2, GPIO.LOW)
             self.p1.ChangeDutyCycle(self.pwmL.data)
             self.p2.ChangeDutyCycle(self.pwmR.data)'''
-            GPIO.output(self.DIG1, GPIO.LOW)
-            GPIO.output(self.DIG2, GPIO.LOW)
-            self.p1.ChangeDutyCycle(self.pwmL.data)
-            self.p2.ChangeDutyCycle(self.pwmR.data)
+            if self.pwmL.data<0:
+                GPIO.output(self.DIG1, GPIO.LOW)
+            if self.pwmR.data<0:
+                GPIO.output(self.DIG2, GPIO.LOW)
+            if self.pwmL.data>0:
+                GPIO.output(self.DIG1, GPIO.HIGH)
+            if self.pwmR.data>0:
+                GPIO.output(self.DIG2, GPIO.HIGH)
+            self.p1.ChangeDutyCycle(abs(self.pwmL.data))
+            self.p2.ChangeDutyCycle(abs(self.pwmR.data))
             sleep(0.01)
             
         self.p1.stop()
